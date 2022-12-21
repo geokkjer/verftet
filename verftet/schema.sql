@@ -1,0 +1,17 @@
+DROP TABLE IF EXISTS type;
+DROP TABLE IF EXISTS rett;
+
+CREATE TABLE type (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  navn TEXT UNIQUE NOT NULL,
+);
+
+CREATE TABLE retter (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  type_id INTEGER NOT NULL,
+  rett_navn TEXT UNIQUE NOT NULL,
+  rett_beskrivelse TEXT,
+  rett_pris INTEGER NOT NULL,
+  FOREGIN KEY (type_id) REFRENCES type (id)
+			 
+    
