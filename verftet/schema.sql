@@ -1,9 +1,16 @@
-DROP TABLE IF EXISTS type;
-DROP TABLE IF EXISTS rett;
+DROP TABLE IF EXISTS type_rett;
+DROP TABLE IF EXISTS retter;
+DROP TABLE IF EXISTS user;
 
-CREATE TABLE type (
+CREATE TABLE user (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
-  navn TEXT UNIQUE NOT NULL,
+  username TEXT UNIQUE NOT NULL,
+  password TEXT NOT NULL
+);
+
+CREATE TABLE type_rett (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  navn TEXT UNIQUE NOT NULL
 );
 
 CREATE TABLE retter (
@@ -12,6 +19,6 @@ CREATE TABLE retter (
   rett_navn TEXT UNIQUE NOT NULL,
   rett_beskrivelse TEXT,
   rett_pris INTEGER NOT NULL,
-  FOREGIN KEY (type_id) REFRENCES type (id)
-			 
+  FOREIGN KEY (type_id) REFERENCES type_rett (id)
+);
     
