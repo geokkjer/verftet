@@ -1,0 +1,129 @@
+* Plan for webapp for cafe-verftet.no
+
+** Flask rammeverk
+
+Vi bruke Flask og koder i python. Bootstrap som js/css biblotek
+
+**  
+* Front
+
+** bootstrap eller base.html
+
+** Hjem view
+#+begin_src html
+
+#+end_src
+** Om Oss view
+** Meny view
+** Logg inn
+*** skjult eller synlig ?
+
+
+* Funksjonalitet
+
+Struktur for appen og koden som styrer funksjonaliteten i appen
+** Mappe-struktur
+
+- verftet
+  README.md
+  - instance
+  - tests
+  - venv
+  - verftet
+    auth.py
+    __init__.py
+    db.py
+    schema.sql
+    - templates
+      base.html
+        
+** pakken som __init__.py
+
+definerer mye av funksjonaliteten i appen
+
+*** Kode
+#+begin_src python
+  
+  import os
+
+  from flask import Flask
+
+  def create_app(test_config=None):
+      # Create and configure the app
+      app = Flask(__name__, instance_relative_config=True)
+      app.config.from_mapping(
+          SECRET_KEY='dev',
+          DATABASE=os.path.join(app.instance_path, 'verftet.sqlite'),
+      )
+
+      if test_config is None:
+          app.config.from_pyfile('config.py', silent=True)
+      else:
+          app.config.from_mapping(test_config)
+
+      try:
+          os.makedirs(app.instance_path)
+      except OSError:
+          pass
+
+      from . import db
+      db.init_app(app)
+
+      return app
+
+      from . import auth
+      app.register_blueprint(auth.bp)
+
+      return app
+
+      # Routing
+      @app.route('/hello')
+      def hello():
+          return 'Hello World!'
+
+      return app
+
+#+end_src
+
+** Auth som auth.py
+
+funksjoner og kode for auth
+
+Inspirert av [[https://flask.palletsprojects.com/][Flask Tutorial]]
+
+*** Kode
+
+#+begin_src python
+
+#+end_src
+
+** database som db.py
+
+*** Kode
+
+#+begin_src python
+
+#+end_src
+
+*** Sikkerhet auth for admin med passord og brukernavn
+*** lett tilgang til meny , foreløpig oppsett med type retter i.e Lunsj/hoved/dessert/drikke og retter i.e navn på retten med beskrivelse + allergener og pris(muligens bilde ??)
+** Meny funksjonalitet
+
+Menyen bør være lett å oppdatere dynamisk og produsere en fin utskrift
+
+*** lage tamplate som leser fra database og lager html med verdiene fra databasen
+*** TODO: design
+
+** Admin funksjonalitet
+*** auth legge til/slette brukere. 
+*** tilgang til databaseverdier for oppdatering av retter på menyen
+
+* Deployment
+** Tradisjonell(vm + webserver + flask backend)
+** docker/kubernetes
+** serverless hos flyctl
+** DNS hos domeneshop.no
+
+
+
+

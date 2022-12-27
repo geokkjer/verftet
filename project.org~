@@ -1,0 +1,26 @@
+* Plan for webapp for cafe-verftet.no
+** Flask rammeverk
+** 
+* Front
+** bootstrap
+** Hjem view
+** Om Oss view
+** Meny view
+* Funksjonalitet
+** database
+*** Sikkerhet auth for admin med passord og brukernavn
+*** lett tilgang til meny , foreløpig oppsett med type retter i.e Lunsj/hoved/dessert/drikke og retter i.e navn på retten med beskrivelse + allergener og pris(muligens bilde ??).
+
+** Meny funksjonalitet
+
+Menyen bør være lett å oppdatere dynamisk og produsere en fin utskrift
+
+*** lage tamplate som leser fra database og lager html med verdiene fra databasen
+*** TODO: design
+
+** Admin funksjonalitet
+*** tilgang til database verdier for oppdatering av retter på menyen
+
+
+
+
